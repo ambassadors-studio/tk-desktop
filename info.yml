@@ -132,6 +132,17 @@ configuration:
         default_value:
         - {button_label: $app, match: Launch $app, menu_label: None}
 
+    project_filters:
+        type: list
+        description: "This is a list of filters used to show or hide projects in
+                     the list."
+        values:
+            type: shotgun_filter
+        default_value:
+            - ["name", "is_not", "Template Project"]
+            - ["archived", "is_not", True]
+            - ["tags.Tag.name", "is_not", "pending review"]
+
     hook_launch_python:
         type: hook
         default_value: launch_python

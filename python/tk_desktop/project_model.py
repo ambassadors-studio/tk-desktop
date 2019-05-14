@@ -245,11 +245,11 @@ class SgProjectModel(ShotgunModel):
         # load up the thumbnail to use when there is none set in Shotgun
         self._missing_thumbnail_project = QtGui.QPixmap(":/tk-desktop/missing_thumbnail_project.png")
 
+        desktop_app = sgtk.platform.current_bundle()
+
         # load up the cached data for the model
-        filters = [
-            ["name", "is_not", "Template Project"],
-            ["archived", "is_not", True]
-        ]
+        filters = desktop_app.get_setting("project_filters")
+
         # Template projects is a Shotgun 6.0 feature, so make sure it exists
         # on the server before filtering on that value.
         if SgProjectModel.supports_project_templates():
